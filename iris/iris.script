@@ -18,4 +18,5 @@
     zpm "install csvgen"
     do ##class(community.csvgen).Generate("/home/irisowner/dev/data/encounters.csv",,"GenAI.encounters")
 
+    
     halt

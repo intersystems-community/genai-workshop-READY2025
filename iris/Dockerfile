@@ -1,11 +1,13 @@
-ARG IMAGE=intersystems/iris-community-arm64:2025.1
+ARG IMAGE=intersystems/iris-community:2025.1
 FROM $IMAGE
 
 WORKDIR /home/irisowner/dev
 
 ARG TESTS=0
 ARG MODULE="GenAI"
-ARG NAMESPACE="USER"
+
+COPY ipm.xml .
+#ARG NAMESPACE="USER"
 
 ## Embedded Python environment
 

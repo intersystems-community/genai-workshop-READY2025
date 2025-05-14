@@ -128,7 +128,7 @@ def load_data():
     print(f"Loaded {len(data)} records")
 
     # write the dataframe to IRIS
-    results = data.to_sql(table_name, engine, if_exists='replace', index=False, schema="GenAI")
+    results = data.to_sql(table_name, engine, if_exists='append', index=False, schema="GenAI")
     print(f"Results: {results}")
 
     update_columns(add_columns=new_cols)

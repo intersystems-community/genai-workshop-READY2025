@@ -44,6 +44,8 @@ Property descriptionproceduresvector As %Library.Vector [ SqlColumnNumber = 21, 
 
 Property descriptionobservationsvector As %Library.Vector [ SqlColumnNumber = 22, SqlFieldName = description_observations_vector ];
 
+Index NameIDX On descriptionconditions;
+
  
 Parameter USEEXTENTSET = 1;
 

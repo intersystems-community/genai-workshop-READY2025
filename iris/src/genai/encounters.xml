@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2025.1 (Build 223U)" ts="2025-05-14 18:20:30">
+<Class name="GenAI.encounters">
+<Description>
+</Description>
+<Final>1</Final>
+<ClassType>persistent</ClassType>
+<DdlAllowed>1</DdlAllowed>
+<Owner>irisowner</Owner>
+<ProcedureBlock>1</ProcedureBlock>
+<SqlRowIdPrivate>1</SqlRowIdPrivate>
+<SqlTableName>encounters</SqlTableName>
+<Super>%Persistent</Super>
+<TimeChanged>67339,65702.444009211</TimeChanged>
+<TimeCreated>67339,63855.497051467</TimeCreated>
+
+<Property name="ENCOUNTERID">
+<Type>%Library.BigInt</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>3</SqlColumnNumber>
+<SqlFieldName>ENCOUNTER_ID</SqlFieldName>
+</Property>
+
+<Property name="CLINICALNOTES">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>4</SqlColumnNumber>
+<SqlFieldName>CLINICAL_NOTES</SqlFieldName>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="BIRTHDATE">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>5</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="FIRST">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>6</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="START">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>7</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="STOP">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>8</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="PATIENTID">
+<Type>%Library.BigInt</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>9</SqlColumnNumber>
+<SqlFieldName>PATIENT_ID</SqlFieldName>
+</Property>
+
+<Property name="ENCOUNTERCLASS">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>10</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="CODE">
+<Type>%Library.BigInt</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>11</SqlColumnNumber>
+</Property>
+
+<Property name="DESCRIPTION">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>12</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="BASEENCOUNTERCOST">
+<Type>%Library.Double</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>13</SqlColumnNumber>
+<SqlFieldName>BASE_ENCOUNTER_COST</SqlFieldName>
+</Property>
+
+<Property name="TOTALCLAIMCOST">
+<Type>%Library.Double</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>14</SqlColumnNumber>
+<SqlFieldName>TOTAL_CLAIM_COST</SqlFieldName>
+</Property>
+
+<Property name="PAYERCOVERAGE">
+<Type>%Library.Double</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>15</SqlColumnNumber>
+<SqlFieldName>PAYER_COVERAGE</SqlFieldName>
+</Property>
+
+<Property name="REASONCODE">
+<Type>%Library.Double</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>16</SqlColumnNumber>
+</Property>
+
+<Property name="REASONDESCRIPTION">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>17</SqlColumnNumber>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="PATIENTAGE">
+<Type>%Library.BigInt</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>18</SqlColumnNumber>
+<SqlFieldName>PATIENT_AGE</SqlFieldName>
+</Property>
+
+<Property name="DESCRIPTIONOBSERVATIONS">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>19</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_OBSERVATIONS</SqlFieldName>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="DESCRIPTIONCONDITIONS">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>20</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_CONDITIONS</SqlFieldName>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="DESCRIPTIONMEDICATIONS">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>21</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_MEDICATIONS</SqlFieldName>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="DESCRIPTIONPROCEDURES">
+<Type>%Library.String</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>22</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_PROCEDURES</SqlFieldName>
+<Parameter name="MAXLEN" value="65535"/>
+</Property>
+
+<Property name="DESCRIPTIONOBSERVATIONSVector">
+<Type>%Library.Vector</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>23</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_OBSERVATIONS_Vector</SqlFieldName>
+<Parameter name="DATATYPE" value="FLOAT"/>
+<Parameter name="LEN" value="384"/>
+</Property>
+
+<Property name="DESCRIPTIONPROCEDURESVector">
+<Type>%Library.Vector</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>24</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_PROCEDURES_Vector</SqlFieldName>
+<Parameter name="DATATYPE" value="FLOAT"/>
+<Parameter name="LEN" value="384"/>
+</Property>
+
+<Property name="DESCRIPTIONMEDICATIONSVector">
+<Type>%Library.Vector</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>25</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_MEDICATIONS_Vector</SqlFieldName>
+<Parameter name="DATATYPE" value="FLOAT"/>
+<Parameter name="LEN" value="384"/>
+</Property>
+
+<Property name="DESCRIPTIONCONDITIONSVector">
+<Type>%Library.Vector</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>26</SqlColumnNumber>
+<SqlFieldName>DESCRIPTION_CONDITIONS_Vector</SqlFieldName>
+<Parameter name="DATATYPE" value="FLOAT"/>
+<Parameter name="LEN" value="384"/>
+</Property>
+
+<Property name="CLINICALNOTESVector">
+<Type>%Library.Vector</Type>
+<Collection/>
+<Required>0</Required>
+<SqlColumnNumber>27</SqlColumnNumber>
+<SqlFieldName>CLINICAL_NOTES_Vector</SqlFieldName>
+<Parameter name="DATATYPE" value="FLOAT"/>
+<Parameter name="LEN" value="384"/>
+</Property>
+
+<Index name="NotesIndex">
+<Properties>CLINICALNOTES</Properties>
+<TypeClass>%iFind.Index.Basic</TypeClass>
+</Index>
+
+<Index name="DDLBEIndex">
+<Description>
+Bitmap Extent Index auto-generated by DDL CREATE TABLE statement.  Do not edit the SqlName of this index.</Description>
+<Type>bitmap</Type>
+<Extent>1</Extent>
+<Properties/>
+<SqlName>%%DDLBEIndex</SqlName>
+</Index>
+
+<Parameter name="ALLOWIDENTITYINSERT">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="USEEXTENTSET">
+<Default>1</Default>
+</Parameter>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^CQ1Z.Blws.1</DataLocation>
+<DefaultData>encountersDefaultData</DefaultData>
+<IdLocation>^CQ1Z.Blws.1</IdLocation>
+<IndexLocation>^CQ1Z.Blws.I</IndexLocation>
+<StreamLocation>^CQ1Z.Blws.S</StreamLocation>
+<ExtentLocation>^CQ1Z.Blws</ExtentLocation>
+<Data name="_GBL_CLINICALNOTESVector">
+<Attribute>CLINICALNOTESVector</Attribute>
+<Structure>node</Structure>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P1</DataDefinitionLocation>
+<Value name="1">
+<Value>CLINICALNOTESVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONCONDITIONSVector">
+<Attribute>DESCRIPTIONCONDITIONSVector</Attribute>
+<Structure>node</Structure>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P2</DataDefinitionLocation>
+<Value name="1">
+<Value>DESCRIPTIONCONDITIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONMEDICATIONSVector">
+<Attribute>DESCRIPTIONMEDICATIONSVector</Attribute>
+<Structure>node</Structure>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P3</DataDefinitionLocation>
+<Value name="1">
+<Value>DESCRIPTIONMEDICATIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONOBSERVATIONSVector">
+<Attribute>DESCRIPTIONOBSERVATIONSVector</Attribute>
+<Structure>node</Structure>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P4</DataDefinitionLocation>
+<Value name="1">
+<Value>DESCRIPTIONOBSERVATIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONPROCEDURESVector">
+<Attribute>DESCRIPTIONPROCEDURESVector</Attribute>
+<Structure>node</Structure>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P5</DataDefinitionLocation>
+<Value name="1">
+<Value>DESCRIPTIONPROCEDURESVector</Value>
+</Value>
+</Data>
+<Data name="encountersDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>ENCOUNTERID</Value>
+</Value>
+<Value name="2">
+<Value>CLINICALNOTES</Value>
+</Value>
+<Value name="3">
+<Value>BIRTHDATE</Value>
+</Value>
+<Value name="4">
+<Value>FIRST</Value>
+</Value>
+<Value name="5">
+<Value>START</Value>
+</Value>
+<Value name="6">
+<Value>STOP</Value>
+</Value>
+<Value name="7">
+<Value>PATIENTID</Value>
+</Value>
+<Value name="8">
+<Value>ENCOUNTERCLASS</Value>
+</Value>
+<Value name="9">
+<Value>CODE</Value>
+</Value>
+<Value name="10">
+<Value>DESCRIPTION</Value>
+</Value>
+<Value name="11">
+<Value>BASEENCOUNTERCOST</Value>
+</Value>
+<Value name="12">
+<Value>TOTALCLAIMCOST</Value>
+</Value>
+<Value name="13">
+<Value>PAYERCOVERAGE</Value>
+</Value>
+<Value name="14">
+<Value>REASONCODE</Value>
+</Value>
+<Value name="15">
+<Value>REASONDESCRIPTION</Value>
+</Value>
+<Value name="16">
+<Value>PATIENTAGE</Value>
+</Value>
+<Value name="17">
+<Value>DESCRIPTIONOBSERVATIONS</Value>
+</Value>
+<Value name="18">
+<Value>DESCRIPTIONCONDITIONS</Value>
+</Value>
+<Value name="19">
+<Value>DESCRIPTIONMEDICATIONS</Value>
+</Value>
+<Value name="20">
+<Value>DESCRIPTIONPROCEDURES</Value>
+</Value>
+</Data>
+<Index name="DDLBEIndex">
+<Location>^CQ1Z.Blws.2</Location>
+</Index>
+<Index name="IDKEY">
+<Location>^CQ1Z.Blws.1</Location>
+</Index>
+<Index name="NotesIndex">
+<Location>^CQ1Z.Blws.3</Location>
+</Index>
+</Storage>
+</Class>
+</Export>
