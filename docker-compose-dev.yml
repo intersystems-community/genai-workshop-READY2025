@@ -1,9 +1,9 @@
 services:
   iris:
     container_name: iris
-    # build:
-    #   context: ./iris
-    #   dockerfile: Dockerfile
+    build:
+      context: ./iris
+      dockerfile: Dockerfile
      # target: final
     restart: always
     command: --check-caps false --ISCAgent false
@@ -13,13 +13,11 @@ services:
       - 53773
     volumes:
       - ./iris:/home/irisowner/dev
-    image: genai-workshop-ready2025-iris:latest
   python:
     container_name: python
-    image: genai-workshop-ready2025-python:latest
-    # build:
-    #   context: ./python
-    #   dockerfile: Dockerfile
+    build:
+      context: ./python
+      dockerfile: Dockerfile
     tty: true
     depends_on: ["iris"]
     restart: always
