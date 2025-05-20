@@ -16,7 +16,7 @@ def generate_response(input_text):
 with st.form("my_form"):
     text = st.text_area(
         "Enter text:",
-        "How is beyond meat doing as a company?",
+        "Tell me about patients with knee pain.",
     )
     submitted = st.form_submit_button("Submit")
     if submitted:
