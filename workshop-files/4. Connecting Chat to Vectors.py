@@ -11,6 +11,7 @@ from langchain_community.document_loaders import SeleniumURLLoader
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationSummaryMemory
 from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings
 from langchain_iris import IRISVector
 import os
 
@@ -24,8 +25,8 @@ extractor = URLExtract()
 
 # Define the IRIS connection - the username, password, hostname, port, and namespace for the IRIS connection.
 username = '_SYSTEM'  # This is the username for the IRIS connection
-password = 'SYS'  # This is the password for the IRIS connection
-hostname = 'IRIS'
+password = 'sys'  # This is the password for the IRIS connection
+hostname = 'localhost'
 port = 1972  # This is the port number for the IRIS connection
 namespace = 'USER'  # This is the namespace for the IRIS connection
 
@@ -33,7 +34,8 @@ namespace = 'USER'  # This is the namespace for the IRIS connection
 CONNECTION_STRING = f"iris://{username}:{password}@{hostname}:{port}/{namespace}"
 
 # Create an instance of OpenAIEmbeddings, a class that provides a way to perform vector embeddings using OpenAI's embeddings.
-embeddings = OpenAIEmbeddings()
+## embeddings = OpenAIEmbeddings()
+embeddings = FastEmbedEmbeddings()
 
 # *** Instantiate IRISVector ***
 
@@ -48,7 +50,7 @@ db2 = IRISVector(
     embedding_function=embeddings,
 
     # The dimension of the embeddings (in this case, 1536). This is 1536 because OpenAI Embeddings use that size
-    dimension=1536,
+    dimension=384,
 
     # The name of the collection in the IRIS vector store.
     collection_name=HEALTHCARE_COLLECTION_NAME,
