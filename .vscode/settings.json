@@ -3,5 +3,6 @@
         "server": "irislocal",
         "ns": "IRISAPP",
         "active": false
-    }
+    }, 
+    "objectscript.export.folder": "iris/src"
 }

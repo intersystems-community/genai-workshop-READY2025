@@ -1,56 +1,186 @@
-
-Class GenAI.encounters Extends %Persistent [ ClassType = persistent, DdlAllowed, Final, Owner = {SuperUser}, ProcedureBlock, SqlRowIdPrivate, SqlTableName = encounters ]
+/// 
+Class GenAI.encounters Extends %Persistent [ ClassType = persistent, DdlAllowed, Final, Owner = {irisowner}, ProcedureBlock, SqlRowIdPrivate, SqlTableName = encounters ]
 {
 
-Property encounterid As %Library.Integer(MAXVAL = 2147483647, MINVAL = -2147483648) [ SqlColumnNumber = 2, SqlFieldName = encounter_id ];
+Property ENCOUNTERID As %Library.BigInt [ SqlColumnNumber = 3, SqlFieldName = ENCOUNTER_ID ];
 
-Property start As %Library.Date [ SqlColumnNumber = 3 ];
+Property CLINICALNOTES As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 4, SqlFieldName = CLINICAL_NOTES ];
 
-Property stop As %Library.Date [ SqlColumnNumber = 4 ];
+Property BIRTHDATE As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 5 ];
 
-Property patientid As %Library.Integer(MAXVAL = 2147483647, MINVAL = -2147483648) [ SqlColumnNumber = 5, SqlFieldName = patient_id ];
+Property FIRST As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 6 ];
 
-Property encounterclass As %Library.String(MAXLEN = 50) [ SqlColumnNumber = 6, SqlFieldName = encounterclass ];
+Property START As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 7 ];
 
-Property encounterclasscode As %Library.Integer(MAXVAL = 2147483647, MINVAL = -2147483648) [ SqlColumnNumber = 7, SqlFieldName = encounter_class_code ];
+Property STOP As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 8 ];
 
-Property encounterclassdescription As %Library.String(MAXLEN = 255) [ SqlColumnNumber = 8, SqlFieldName = encounter_class_description ];
+Property PATIENTID As %Library.BigInt [ SqlColumnNumber = 9, SqlFieldName = PATIENT_ID ];
 
-Property baseencountercost As %Library.Numeric(MAXVAL = 99999999.99, MINVAL = -99999999.99, SCALE = 2) [ SqlColumnNumber = 9, SqlFieldName = base_encounter_cost ];
+Property ENCOUNTERCLASS As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 10 ];
 
-Property totalclaimcost As %Library.Numeric(MAXVAL = 99999999.99, MINVAL = -99999999.99, SCALE = 2) [ SqlColumnNumber = 10, SqlFieldName = total_claim_cost ];
+Property CODE As %Library.BigInt [ SqlColumnNumber = 11 ];
 
-Property payercoverage As %Library.Numeric(MAXVAL = 99999999.99, MINVAL = -99999999.99, SCALE = 2) [ SqlColumnNumber = 11, SqlFieldName = payer_coverage ];
+Property DESCRIPTION As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 12 ];
 
-Property reasoncode As %Library.Numeric(MAXVAL = 999999999.9, MINVAL = -999999999.9, SCALE = 1) [ SqlColumnNumber = 12, SqlFieldName = reason_code ];
+Property BASEENCOUNTERCOST As %Library.Double [ SqlColumnNumber = 13, SqlFieldName = BASE_ENCOUNTER_COST ];
 
-Property reasondescription As %Library.String(MAXLEN = 255) [ SqlColumnNumber = 13, SqlFieldName = reason_description ];
+Property TOTALCLAIMCOST As %Library.Double [ SqlColumnNumber = 14, SqlFieldName = TOTAL_CLAIM_COST ];
 
-Property description As %Stream.GlobalCharacter [ SqlColumnNumber = 14 ];
+Property PAYERCOVERAGE As %Library.Double [ SqlColumnNumber = 15, SqlFieldName = PAYER_COVERAGE ];
 
-Property descriptionconditions As %Library.String(MAXLEN = 2056) [ SqlColumnNumber = 15, SqlFieldName = description_conditions ];
+Property REASONCODE As %Library.Double [ SqlColumnNumber = 16 ];
 
-Property descriptionmedications As %Library.String(MAXLEN = 2056) [ SqlColumnNumber = 16, SqlFieldName = description_medications ];
+Property REASONDESCRIPTION As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 17 ];
 
-Property descriptionprocedures As %Library.String(MAXLEN = 2056) [ SqlColumnNumber = 17, SqlFieldName = description_procedures ];
+Property PATIENTAGE As %Library.BigInt [ SqlColumnNumber = 18, SqlFieldName = PATIENT_AGE ];
 
-Property descriptionobservations As %Library.String(MAXLEN = 2056) [ SqlColumnNumber = 18, SqlFieldName = description_observations ];
+Property DESCRIPTIONOBSERVATIONS As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 19, SqlFieldName = DESCRIPTION_OBSERVATIONS ];
 
-Property descriptionconditionsvector As %Library.Vector [ SqlColumnNumber = 19, SqlFieldName = description_conditions_vector ];
+Property DESCRIPTIONCONDITIONS As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 20, SqlFieldName = DESCRIPTION_CONDITIONS ];
 
-Property descriptionmedicationsvector As %Library.Vector [ SqlColumnNumber = 20, SqlFieldName = description_medications_vector ];
+Property DESCRIPTIONMEDICATIONS As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 21, SqlFieldName = DESCRIPTION_MEDICATIONS ];
 
-Property descriptionproceduresvector As %Library.Vector [ SqlColumnNumber = 21, SqlFieldName = description_procedures_vector ];
+Property DESCRIPTIONPROCEDURES As %Library.String(MAXLEN = 65535) [ SqlColumnNumber = 22, SqlFieldName = DESCRIPTION_PROCEDURES ];
 
-Property descriptionobservationsvector As %Library.Vector [ SqlColumnNumber = 22, SqlFieldName = description_observations_vector ];
+Property DESCRIPTIONOBSERVATIONSVector As %Library.Vector(DATATYPE = "FLOAT", LEN = 384) [ SqlColumnNumber = 23, SqlFieldName = DESCRIPTION_OBSERVATIONS_Vector ];
 
-Index NameIDX On descriptionconditions;
+Property DESCRIPTIONPROCEDURESVector As %Library.Vector(DATATYPE = "FLOAT", LEN = 384) [ SqlColumnNumber = 24, SqlFieldName = DESCRIPTION_PROCEDURES_Vector ];
 
- 
-Parameter USEEXTENTSET = 1;
+Property DESCRIPTIONMEDICATIONSVector As %Library.Vector(DATATYPE = "FLOAT", LEN = 384) [ SqlColumnNumber = 25, SqlFieldName = DESCRIPTION_MEDICATIONS_Vector ];
+
+Property DESCRIPTIONCONDITIONSVector As %Library.Vector(DATATYPE = "FLOAT", LEN = 384) [ SqlColumnNumber = 26, SqlFieldName = DESCRIPTION_CONDITIONS_Vector ];
+
+Property CLINICALNOTESVector As %Library.Vector(DATATYPE = "FLOAT", LEN = 384) [ SqlColumnNumber = 27, SqlFieldName = CLINICAL_NOTES_Vector ];
+
+Index NotesIndex On (CLINICALNOTES) As %iFind.Index.Basic;
 
 /// Bitmap Extent Index auto-generated by DDL CREATE TABLE statement.  Do not edit the SqlName of this index.
 Index DDLBEIndex [ Extent, SqlName = "%%DDLBEIndex", Type = bitmap ];
 
+Parameter ALLOWIDENTITYINSERT = 1;
+
+Parameter USEEXTENTSET = 1;
+
+Storage Default
+{
+<Data name="_GBL_CLINICALNOTESVector">
+<Attribute>CLINICALNOTESVector</Attribute>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P1</DataDefinitionLocation>
+<Structure>node</Structure>
+<Value name="1">
+<Value>CLINICALNOTESVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONCONDITIONSVector">
+<Attribute>DESCRIPTIONCONDITIONSVector</Attribute>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P2</DataDefinitionLocation>
+<Structure>node</Structure>
+<Value name="1">
+<Value>DESCRIPTIONCONDITIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONMEDICATIONSVector">
+<Attribute>DESCRIPTIONMEDICATIONSVector</Attribute>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P3</DataDefinitionLocation>
+<Structure>node</Structure>
+<Value name="1">
+<Value>DESCRIPTIONMEDICATIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONOBSERVATIONSVector">
+<Attribute>DESCRIPTIONOBSERVATIONSVector</Attribute>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P4</DataDefinitionLocation>
+<Structure>node</Structure>
+<Value name="1">
+<Value>DESCRIPTIONOBSERVATIONSVector</Value>
+</Value>
+</Data>
+<Data name="_GBL_DESCRIPTIONPROCEDURESVector">
+<Attribute>DESCRIPTIONPROCEDURESVector</Attribute>
+<DataDefinitionLocation>^CQ1Z.Blws.1.P5</DataDefinitionLocation>
+<Structure>node</Structure>
+<Value name="1">
+<Value>DESCRIPTIONPROCEDURESVector</Value>
+</Value>
+</Data>
+<Data name="encountersDefaultData">
+<Value name="1">
+<Value>ENCOUNTERID</Value>
+</Value>
+<Value name="2">
+<Value>CLINICALNOTES</Value>
+</Value>
+<Value name="3">
+<Value>BIRTHDATE</Value>
+</Value>
+<Value name="4">
+<Value>FIRST</Value>
+</Value>
+<Value name="5">
+<Value>START</Value>
+</Value>
+<Value name="6">
+<Value>STOP</Value>
+</Value>
+<Value name="7">
+<Value>PATIENTID</Value>
+</Value>
+<Value name="8">
+<Value>ENCOUNTERCLASS</Value>
+</Value>
+<Value name="9">
+<Value>CODE</Value>
+</Value>
+<Value name="10">
+<Value>DESCRIPTION</Value>
+</Value>
+<Value name="11">
+<Value>BASEENCOUNTERCOST</Value>
+</Value>
+<Value name="12">
+<Value>TOTALCLAIMCOST</Value>
+</Value>
+<Value name="13">
+<Value>PAYERCOVERAGE</Value>
+</Value>
+<Value name="14">
+<Value>REASONCODE</Value>
+</Value>
+<Value name="15">
+<Value>REASONDESCRIPTION</Value>
+</Value>
+<Value name="16">
+<Value>PATIENTAGE</Value>
+</Value>
+<Value name="17">
+<Value>DESCRIPTIONOBSERVATIONS</Value>
+</Value>
+<Value name="18">
+<Value>DESCRIPTIONCONDITIONS</Value>
+</Value>
+<Value name="19">
+<Value>DESCRIPTIONMEDICATIONS</Value>
+</Value>
+<Value name="20">
+<Value>DESCRIPTIONPROCEDURES</Value>
+</Value>
+</Data>
+<DataLocation>^CQ1Z.Blws.1</DataLocation>
+<DefaultData>encountersDefaultData</DefaultData>
+<ExtentLocation>^CQ1Z.Blws</ExtentLocation>
+<IdLocation>^CQ1Z.Blws.1</IdLocation>
+<Index name="DDLBEIndex">
+<Location>^CQ1Z.Blws.2</Location>
+</Index>
+<Index name="IDKEY">
+<Location>^CQ1Z.Blws.1</Location>
+</Index>
+<Index name="NotesIndex">
+<Location>^CQ1Z.Blws.3</Location>
+</Index>
+<IndexLocation>^CQ1Z.Blws.I</IndexLocation>
+<StreamLocation>^CQ1Z.Blws.S</StreamLocation>
+<Type>%Storage.Persistent</Type>
+}
 
 }
