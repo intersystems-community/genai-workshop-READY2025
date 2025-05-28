@@ -23,7 +23,9 @@ RUN \
     sentence_transformers \
     streamlit \
     urlextract \
-    fastembed
+    fastembed \
+    matplotlib \
+    seaborn
 
 # 2 - Notebooks layer - add .ipynb and .py files
 FROM base AS notebooks
