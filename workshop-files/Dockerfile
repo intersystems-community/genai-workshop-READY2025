@@ -25,7 +25,9 @@ RUN \
     urlextract \
     fastembed \
     matplotlib \
-    seaborn
+    seaborn \
+    ragas==0.1.7 \
+    pandas
 
 # 2 - Notebooks layer - add .ipynb and .py files
 FROM base AS notebooks
