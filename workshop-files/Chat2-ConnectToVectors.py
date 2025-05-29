@@ -25,10 +25,10 @@ extractor = URLExtract()
 
 # Define the IRIS connection - the username, password, hostname, port, and namespace for the IRIS connection.
 username = '_SYSTEM'  # This is the username for the IRIS connection
-password = 'sys'  # This is the password for the IRIS connection
-hostname = 'localhost'
+password = 'SYS'  # This is the password for the IRIS connection
+hostname = 'IRIS'
 port = 1972  # This is the port number for the IRIS connection
-namespace = 'USER'  # This is the namespace for the IRIS connection
+namespace = 'IRISAPP'  # This is the namespace for the IRIS connection
 
 # Create the connection string for the IRIS connection
 CONNECTION_STRING = f"iris://{username}:{password}@{hostname}:{port}/{namespace}"
