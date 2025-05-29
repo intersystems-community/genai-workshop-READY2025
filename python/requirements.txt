@@ -13,7 +13,7 @@ python-dotenv
 tiktoken
 # Additional packages discovered during workshop testing
 fastembed
-ragas
+deepeval
 jq
 langchain-openai
 ipywidgets
