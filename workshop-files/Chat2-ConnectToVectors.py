@@ -40,25 +40,7 @@ embeddings = FastEmbedEmbeddings()
 # *** Instantiate IRISVector ***
 
 ### Add IRISVector code here
-# Define the name of the finance collection in the IRIS vector store.
-HEALTHCARE_COLLECTION_NAME = "case_reports"
 
-# Create an instance of IRISVector.
-
-db2 = IRISVector(
-    # The embedding function to use for the vector embeddings.
-    embedding_function=embeddings,
-
-    # The dimension of the embeddings (in this case, 1536). This is 1536 because OpenAI Embeddings use that size
-    dimension=384,
-
-    # The name of the collection in the IRIS vector store.
-    collection_name=HEALTHCARE_COLLECTION_NAME,
-
-    # The connection string to use for connecting to the IRIS vector store.
-    connection_string=CONNECTION_STRING,
-
-)
 
 
 ### Used to have a starting message in our application
@@ -147,7 +129,6 @@ if prompt := st.chat_input():
         template = f"""
 Prompt: {prompt}
 
-Relevant Documents: {relevant_docs}
 
                 """
 
