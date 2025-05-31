@@ -23,21 +23,10 @@ RUN \
     sentence_transformers \
     streamlit \
     urlextract \
-    fastembed
-
-# 2 - Notebooks layer - add .ipynb and .py files
-FROM base AS notebooks
-
-WORKDIR /opt/intersystems
-
-COPY data /opt/intersystems/data
-COPY ["1. Embed Data Manually.ipynb", "/opt/intersystems/"]
-COPY ["2. Building a Simple Chat.py", "/opt/intersystems/"]
-COPY ["2a. Running Application.ipynb", "/opt/intersystems/"]
-COPY ["3. Using Helper Libraries.ipynb", "/opt/intersystems/"]
-COPY ["4. Connecting Chat to Vectors.py", "/opt/intersystems/"]
-COPY ["4a. Running Application.ipynb", "/opt/intersystems/"]
-COPY ["5. Putting it Together.py", "/opt/intersystems/"]
-COPY ["5a. Running Application.ipynb", "/opt/intersystems/"]
+    fastembed \
+    matplotlib \
+    seaborn \
+    ragas==0.1.7 \
+    pandas
 
 CMD start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
