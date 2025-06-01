@@ -188,9 +188,9 @@ with st.sidebar:
     st.header("Settings")
     
     # Dataset selection
-    choose_dataset = st.radio(
-        "Choose an IRIS collection:", ("Case Reports", "Encounters"), index=0
-    )
+    ## choose_dataset = st.radio(
+    ##    "Choose an IRIS collection:", ("Case Reports", "Encounters"), index=0
+    ##)
     
     # Show explanation toggle
     explain = st.radio("Show reasoning steps?:", ("Yes", "No"), index=0)
