@@ -77,7 +77,7 @@ class VectorSearchTool(BaseTool):
 # Email Tool
 class EmailTool(BaseTool):
     name: str = "send_email"
-    description: str = "Send an email notification. Input should be a JSON string with keys: to, subject, message, html (optional). User must provide an email address."
+    description: str = "Send an email notification. Input should be a JSON string with keys: to, subject, html. User must provide an email address."
     
     def _run(self, input_data: str) -> str:
         """Send an email using the provided API endpoint."""
