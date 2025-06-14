@@ -74,14 +74,6 @@ st.header("↗️ READY 2025 Vector Search ↗️")
 # In streamlit we can add settings using the st.sidebar
 with st.sidebar:
     st.header("Settings")
-    # We let our users select what vector store to query against
-    choose_dataset = st.radio(
-        "Choose an IRIS collection:", ("Case Reports", "Encounters"), index=1
-    )
-    # Allow user to toggle which model is being used (gpt-4 in this workshop)
-    choose_LM = "gpt-4-turbo"
-    # Allow user to toggle whether explanation is shown with responses
-    explain = st.radio("Show explanation?:", ("Yes", "No"), index=0)
     temperature_slider = st.slider("Temperature", float(0), float(1), float(0.0), float(0.01))
     # link_retrieval = st.radio("Retrieve Links?:",("No","Yes"),index=0)
 
