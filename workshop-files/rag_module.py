@@ -31,7 +31,7 @@ class WorkshopRAG:
     """
     
     def __init__(self, 
-                 collection_name: str = "case_reports",
+    ##             collection_name: str = "case_reports",
                  connection_string: str = None,
                  llm_model: str = "gpt-4-turbo",
                  temperature: float = 0.0):
@@ -74,8 +74,6 @@ class WorkshopRAG:
         """
         Process a question through the RAG pipeline
         
-        This method replicates the exact logic from Chat3-GuardrailsAndHistory.py
-        
         Args:
             question: User's question
             conversation_history: Previous conversation context (optional)
@@ -83,22 +81,21 @@ class WorkshopRAG:
         Returns:
             Tuple of (answer, retrieved_contexts)
         """
-        # Step 1: Vector similarity search (same as chat app)
+        # Step 1: Vector similarity search
         docs_with_score = self.db.similarity_search_with_score(question)
         
-        # Step 2: Build relevant documents (same as chat app)
+        # Step 2: Build relevant documents
         relevant_docs = [
             "".join(str(doc.page_content)) + " " for doc, _ in docs_with_score
         ]
         
-        # Step 3: Create the exact template from chat app
+        # Step 3: Create the template prompt
         template = f"""
 Prompt: {question}
 
 ### Add conversation history here
-{conversation_history}
 
-Relevant Documents: {relevant_docs}
+Relevant Documents: {x}
 
 ### Add guard rails here
                 """

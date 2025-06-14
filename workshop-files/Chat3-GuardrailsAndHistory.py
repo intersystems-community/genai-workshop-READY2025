@@ -25,43 +25,21 @@ from urlextract import URLExtract
 
 extractor = URLExtract()
 
-# Define the IRIS connection - the username, password, hostname, port, and namespace for the IRIS connection.
-username = "_SYSTEM"  # This is the username for the IRIS connection
-password = "SYS"  # This is the password for the IRIS connection
-hostname = "IRIS"
-port = 1972  # This is the port number for the IRIS connection
-namespace = "IRISAPP"  # This is the namespace for the IRIS connection
+# Import our shared RAG module
+from rag_module import WorkshopRAG
 
-# Create the connection string for the IRIS connection
-CONNECTION_STRING = f"iris://{username}:{password}@{hostname}:{port}/{namespace}"
+# Initialize the RAG system
+@st.cache_resource
+def initialize_rag():
+    """Initialize the RAG system (cached for performance)"""
+    return WorkshopRAG(
+        collection_name="case_reports",
+        llm_model="gpt-4-turbo",
+        temperature=0.0
+    )
 
-# Create an instance of OpenAIEmbeddings, a class that provides a way to perform vector embeddings using OpenAI's embeddings.
-## embeddings = OpenAIEmbeddings()
-embeddings = FastEmbedEmbeddings()
-
-### Add IRISVector code here
-# Define the name of the finance collection in the IRIS vector store.
-HEALTHCARE_COLLECTION_NAME = "case_reports"
-
-# Create an instance of IRISVector.
-
-db2 = IRISVector(
-    # The embedding function to use for the vector embeddings.
-    embedding_function=embeddings,
-
-    # The dimension of the embeddings (in this case, 1536). This is 1536 because OpenAI Embeddings use that size
-    ## dimension=1536,
-    dimension=384,
-
-    # The name of the collection in the IRIS vector store.
-    collection_name=HEALTHCARE_COLLECTION_NAME,
-
-    # The connection string to use for connecting to the IRIS vector store.
-    connection_string=CONNECTION_STRING,
-
-)
-
-# TODO: Add second healthcare data set? Define the name of the finance collection in the IRIS vector store.
+# Get the RAG system
+rag_system = initialize_rag()
 
 # Used to have a starting message in our application
 # Check if the "messages" key exists in the Streamlit session state.
@@ -125,64 +103,33 @@ if prompt := st.chat_input():
     # Display the user's input in the chat window, escaping any '$' characters
     st.chat_message("user").write(prompt.replace("$", "\$"))
 
-    # Create an instance of the ChatOpenAI class, which is a language model
-    llm = ChatOpenAI(
-        temperature=0,  # Set the temperature for the language model (0 is default)
-        model_name='gpt-4-turbo',  # Use the selected language model (gpt-3.5-turbo or gpt-4-turbo)
-    )
-
     # Retrieve the conversation chain instance from session state.
     conversation_sum = st.session_state["conversation_sum"]
 
     # Here we respond to the user based on the messages they receive
     with st.chat_message("assistant"):
-        # We rename our prompt (user input) to query to better illustrate that we'll compare it to the vector store
-        query = prompt
-        # We'll store the most similar results from the vector database here
-        docs_with_score = None
-        # Based on the dataset, we will compare the user query to the proper vector store
-        # if choose_dataset == "healthcare":
-        #     # If Healthcare, that's db (collection name HC_COLLECTION_NAME)
-        #     docs_with_score = db.similarity_search_with_score(query)
-        # elif choose_dataset == "finance":
-        # If Finance, that's db2 (collection name FINANCE_COLLECTION)
-        docs_with_score = db2.similarity_search_with_score(query)
-        # else:
-        #     # If Nothing, we have No Context
-        #     print("No Dataset selected")
-        print(docs_with_score)
-        # Here we build the prompt for the AI: Prompt is the user input and docs_with_score is the vector database result
-        relevant_docs = [
-            "".join(str(doc.page_content)) + " " for doc, _ in docs_with_score
-        ]
-       
-        # if link retrieval, then try to scrape the content from the page
-        # Prefetch the first returned link and include it in the documents
-        # if link_retrieval == "Yes":
-        #     first_relevant_doc = relevant_docs
-        #     urls = extractor.find_urls(str(first_relevant_doc))
-        #     print(urls) # prints: ['stackoverflow.com']
-        #     web_loader = SeleniumURLLoader(urls[:1])
-        #     web_docs = web_loader.load()
-        #     print(web_docs)
-        #     pass
-        
         # Get conversation history from memory
         conversation_history = conversation_sum.memory.load_memory_variables({})['history']
-
-        # *** Create LLM Prompt ***
-        template = f"""
-Prompt: {prompt}
-
-### Add conversation history here
-
-Relevant Documents: {relevant_docs}
-
-### Add guard rails here
-                """
-
-        # And our response is taken care of by the conversation summarization chain with our template prompt
-        resp = conversation_sum.predict(input=template)
+        
+        # 🚀 NEW: Use the shared RAG module instead of duplicating logic
+        try:
+            # Query the RAG system with conversation chain for memory
+            resp, retrieved_contexts = rag_system.query(
+                question=prompt,
+                conversation_history=conversation_history,
+                use_conversation_chain=True,
+                conversation_chain=conversation_sum
+            )
+            
+            # Display debug information if requested
+            if explain == "Yes":
+                st.write("**Retrieved Contexts:**")
+                for i, context in enumerate(retrieved_contexts[:2]):  # Show first 2 contexts
+                    st.write(f"Context {i+1}: {context[:200]}...")
+            
+        except Exception as e:
+            resp = f"Sorry, I encountered an error: {str(e)}"
+            st.error(f"Error in RAG pipeline: {e}")
 
         # Finally, we make sure that if the user didn't put anything or cleared session, we reset the page
         if "messages" not in st.session_state:
@@ -197,17 +144,7 @@ Relevant Documents: {relevant_docs}
         st.session_state.messages.append(
             {"role": "assistant", "content": resp}
         )
-        print(resp)
         
-        # And we also add the response from the AI
-        st.write(resp.replace("$", "\$"))
-        if explain == "Yes":
-            with st.expander("Supporting Evidence"):
-                for doc, _ in docs_with_score[:1]:
-                    doc_content = "".join(str(doc.page_content))
-                    # st.write(f"""Here are the relevant documents""")
-                    st.write(f"""{doc_content}""")
-                    urls = extractor.find_urls(doc_content)
-                    print(urls)  # prints: ['stackoverflow.com']
-                    for url in urls:
-                        st.page_link(url, label="Source")
+        # Display the response
+        st.write(resp)
+        print(resp)
