@@ -76,6 +76,8 @@ with st.sidebar:
     st.header("Settings")
     temperature_slider = st.slider("Temperature", float(0), float(1), float(0.0), float(0.01))
     # link_retrieval = st.radio("Retrieve Links?:",("No","Yes"),index=0)
+    # Allow user to toggle whether explanation is shown with responses
+    explain = st.radio("Show explanation?:", ("Yes", "No"), index=1)
 
 # In streamlet, we can add our messages to the user screen by listening to our session
 for msg in st.session_state["messages"]:
@@ -118,6 +120,7 @@ if prompt := st.chat_input():
                 st.write("**Retrieved Contexts:**")
                 for i, context in enumerate(retrieved_contexts[:2]):  # Show first 2 contexts
                     st.write(f"Context {i+1}: {context[:200]}...")
+                st.write("---")
             
         except Exception as e:
             resp = f"Sorry, I encountered an error: {str(e)}"
