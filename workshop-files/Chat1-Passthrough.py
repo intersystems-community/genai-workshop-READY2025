@@ -16,7 +16,7 @@ def generate_response(input_text):
 with st.form("my_form"):
     text = st.text_area(
         "Enter text:",
-        "Tell me about child patients that have presented with knee pain.",
+        "Tell me about adult patients that have presented with knee pain.",
     )
     submitted = st.form_submit_button("Submit")
     if submitted:

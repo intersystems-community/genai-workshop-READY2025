@@ -148,7 +148,7 @@ if __name__ == "__main__":
     try:
         rag = WorkshopRAG()
         
-        test_question = "What are common symptoms of knee problems in young patients?"
+        test_question = "What are common symptoms of knee problems in adult patients?"
         answer, contexts = rag.query(test_question)
         
         print(f"\n📝 Test Question: {test_question}")
