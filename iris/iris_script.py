@@ -25,6 +25,6 @@ iris.cls('%SYSTEM.OBJ').Import("/home/irisowner/dev/src/GenAI/encounters.xml", "
 
 table_name = "GenAI.encounters"
 data = load_data()
-# load_model()
+#load_model()
 add_embedding_config(delete=False)
 vectorize_data(data, table_name)

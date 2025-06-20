@@ -20,6 +20,8 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+from utils import LLM_MODEL
+
 # Load the urlextractor, a module that extracts URLs and will enable us to follow web-links
 from urlextract import URLExtract
 
@@ -34,7 +36,7 @@ def initialize_rag():
     """Initialize the RAG system (cached for performance)"""
     return WorkshopRAG(
         collection_name="case_reports",
-        llm_model="gpt-4-turbo",
+        llm_model=LLM_MODEL,
         temperature=0.0
     )
 
@@ -58,7 +60,7 @@ if "messages" not in st.session_state:
 if "conversation_sum" not in st.session_state:
     llm = ChatOpenAI(
         temperature=0.0,
-        model_name='gpt-4-turbo',
+        model_name=LLM_MODEL,
     )
     st.session_state["conversation_sum"] = ConversationChain(
         llm=llm,

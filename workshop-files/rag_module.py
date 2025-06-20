@@ -22,6 +22,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv(override=True)
 
+from utils import LLM_MODEL
 class WorkshopRAG:
     """
     Workshop RAG System
@@ -33,7 +34,7 @@ class WorkshopRAG:
     def __init__(self, 
     ##             collection_name: str = "case_reports",
                  connection_string: str = None,
-                 llm_model: str = "gpt-4-turbo",
+                 llm_model: str = LLM_MODEL,
                  temperature: float = 0.0):
         """
         Initialize the RAG system

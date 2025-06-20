@@ -23,6 +23,8 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+from utils import LLM_MODEL
+
 # Define the IRIS connection
 username = "_SYSTEM"
 password = "SYS"
@@ -129,7 +131,7 @@ Remember the conversation context and refer to previous searches when appropriat
 ])
 
 # Initialize LLM
-llm = ChatOpenAI(model="gpt-4-turbo", temperature=0)
+llm = ChatOpenAI(model=LLM_MODEL, temperature=0)
 
 # Bind tools to LLM
 llm_with_tools = llm.bind_tools(tools)

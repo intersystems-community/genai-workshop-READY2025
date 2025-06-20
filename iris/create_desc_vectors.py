@@ -189,5 +189,12 @@ def vectorize_data(data, table_name):
 if __name__ == '__main__':
 
     data = load_data()
-    # # add_embedding_config(delete=False)
+    add_embedding_config(delete=False)
     vectorize_data(data, table_name)
+
+
+"""
+Select top 10 *, CLINICAL_NOTES_Vector
+FROM GenAI.encounters
+order by VECTOR_DOT_PRODUCT(CLINICAL_NOTES_Vector, embedding('diabetes','sentence-transformers/all-MiniLM-L6-v2'))
+"""

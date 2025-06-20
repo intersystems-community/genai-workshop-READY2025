@@ -44,4 +44,32 @@
 1. Using the db-api driver from the community
    1. https://github.com/intersystems-community/intersystems-irispython/releases/download/3.9.2/intersystems_iris-3.9.2-py3-none-any.whl
 2. Existing data load uses pandas, which creates the GenAI.encounters table from the CSV
-   
+
+
+## Section 2 presentation
+
+In Sections 3 and 4 we covered adding history and guardrails to our LLM application. 
+
+How did we add these these two elements? (**I'm looking for an sanswer like we added them to the prompt**)
+
+Taking a step back from this application, there is often a critical decision that has to be made when using LLMs, fortunately that is for most use cases quite easy to make. In our sample application, we are modifying the the prompt, the context, in order to refine the behavior of the LLM. 
+
+What other techniques can we use to refine and optimize our LLM applications? (**Fine tuning and Agents(or tooling and mutliagents)**)
+
+Fine tuning is a tricky business and bnot in scope for this workshop, but involves modfiying the parameters, the weights, biases and embedding vectors. In our last section, Sergei will introduce Agents. But for now, and for almost all of the starting work you do with an LLM, the focus will be primarily on modifying the prompt and context to get better results. Both of which are strings, the prompt a templated string, and the context the interpolated string.
+
+Well, that makes things simple, right? Send in a string, get a string back. So even if I have a computer melded to my brain and communicating with a quantum computer to create a perfect representation of my memory, it still just has to output a string! Ok, I know multi-modal LLMs make it possible to send in audio and images, but my quantum computer only has 4 qbits so were are going to just stick with strings!
+
+The only problem is that with even just considering 10k words, a small fraction of the total vocabulary, even if we limit our strings to 5 words that means our total possible combinations is 10 Vigintillion(10^20) inputs with the same amount of possible responses. Maybe not so easy!
+
+This is why having a test first mindset is so important. While we used DeepEval to generate some test casts, using our gold standards, in a real application you will likely want to engage more with SME's. While this type of testing can be difficult because it crosses the tech and business lines and requires an SME's time, it is also what gives you a great advantage because you know your data better than anyone and that is the most important thing to have to build successful LLM apps.
+
+Our testing example was really just an example and surely has some pretty big flaws.
+
+Did anyone notice any issues? One was mentioned in the Conclusion.
+
+** Too small of a RAG dataset **
+** No specifying how many documents to return - default is 4 but this is buried in the code for iris-langchain**
+** No specifying a minimal similiarity score **
+
+Our next 2 topics - Tuning Retrieval and Agents will take youy through 2 more advanced techniques for refining your LLM enabled application.
