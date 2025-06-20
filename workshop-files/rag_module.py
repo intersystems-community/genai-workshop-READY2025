@@ -30,7 +30,6 @@ class WorkshopRAG:
     This class encapsulates the RAG pipeline used throughout the workshop.
     It can be used by both the Streamlit chat app and the evaluation framework.
     """
-    
     def __init__(self, 
     ##             collection_name: str = "case_reports",
                  connection_string: str = None,
